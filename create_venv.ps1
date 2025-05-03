@@ -34,13 +34,13 @@ $venv_root = "$env:USERPROFILE\.venv\"
     $venv_create = "python -m venv $venv_path"
     Invoke-Expression $venv_create
 
-   #check if command successful
+   ## Check if command successful
     if(!($?)){
       write-host "Create virtual environment failed(!!)"
       exit
     }
 
-    $venv_activate = join-path $venv_root $venv_name "Scripts\Activate.ps1"
+    $venv_activate = join-path -Path $venv_root -ChildPath $venv_name | Join-Path -ChildPath "Scripts\Activate.ps1"
     Invoke-Expression $venv_activate
 
     python -m pip install --upgrade pip

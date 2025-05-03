@@ -26,7 +26,8 @@ $venv_root = "$env:USERPROFILE\.venv\"
  }
 
  ## Go to repository
- $repo_path = join-path $repo_root $repo_name
+ $repo_path = Join-Path -Path $repo_root -ChildPath $repo_name
+ Write-Host $repo_path
  if(!(test-path $repo_path)){
     write-host "Repo at $repo_path does not exist"
  }
@@ -36,7 +37,9 @@ $venv_root = "$env:USERPROFILE\.venv\"
  }
 
  ## Launch virtual environment
- $venv_activate = join-path $venv_root $repo_name "Scripts\Activate.ps1"
+ $script_name = "Scripts\Activate.ps1"
+ $venv_activate = Join-Path $venv_root -ChildPath $repo_name | Join-Path -ChildPath $script_name
+
 
  if(!(test-path $venv_activate)){
     write-host "Venv script at $venv_activate does not exist"
